@@ -31,7 +31,29 @@ def get_user_cosmetics(user_name):
             break
     
     return [user_color_primary, user_color_secondary, user_items]
+
+def get_user_cosmetics_id(user_name):
+    user_url = f"{SERVER_URL}get_user_info?user_id={user_name}"
+    user_info = requests.get(user_url).json()
     
+    user_color_primary = None
+    user_color_secondary = None
+    user_items = None
+    user_name = user_info["user_name"]
+
+    if "active_customizations" not in user_info:
+        user_info["active_customizations"] = {
+            "items": {}
+        }
+    if "items" not in user_info["active_customizations"]:
+        user_info["active_customizations"]["items"] = {}
+
+    user_color_primary = user_info["active_customizations"]["player_color_primary"]["color"]
+    user_color_secondary = user_info["active_customizations"]["player_color_secondary"]["color"]
+    user_items = user_info["active_customizations"]["items"]
+
+    return [user_color_primary, user_color_secondary, user_items, user_name]
+
 def get_shop():
     shop_url = f"{SERVER_URL}get_shop_items?version=1"
     shop = requests.get(shop_url).json()
@@ -39,7 +61,8 @@ def get_shop():
 
 def generate(userName):
     shop = get_shop()
-    cosmetics = get_user_cosmetics(userName)
+    # cosmetics = get_user_cosmetics(userName)
+    cosmetics = get_user_cosmetics_id(userName)
 
     primary = cosmetics[0]
     secondary = cosmetics[1]
@@ -204,97 +227,100 @@ def generate(userName):
     bpy.context.scene.render.film_transparent = True
     bpy.ops.render.render(write_still=True)
 
-    bpy.data.images['Render Result'].save_render(f'img/{userName}.png')
+    bpy.data.images['Render Result'].save_render(f'img/{cosmetics[3]}.png')
     # bpy.ops.wm.save_as_mainfile(filepath=f"{userName}.blend")
 
-for name in [
-    "22joshi22",
-    "1235311PNUT",
-    "AFT_Daring",
-    "Auran_Simia",
-    "BlackCat508",
-    "boohoo77",
-    "Caziggy",
-    "cjbeast006",
-    "CoblerB1",
-    "CokeDeee",
-    "Convrist",
-    "CursedPhantom",
-    "cyclops_22",
-    "D2whiplash",
-    "dotindex",
-    "envi0us",
-    "felixart",
-    "FROSTY_CROSS",
-    "fruitbythefist",
-    "gman2giant",
-    "iceyboxes",
-    "JeffBobDude",
-    "kookookrazy",
-    "levi8020",
-    "MiloJenSopha",
-    "Mystery8281",
-    "Nash_Human",
-    "nixmars",
-    "RainbowMonke",
-    "rougueRunner",
-    "Shadowmaker99",
-    "slin",
-    "SteijeAwesome",
-    "TLTT",
-    "vrvinny",
-    "wpbrotherly",
-    "yoshibigbum",
-    "slin",
-    "vestria",
-    "fitartist334071",
-    "poggggg",
-    "mystery8281",
-    "littlebeastm8",
-    "trap11190",
-    "luhmao",
-    "itz_alwx",
-    "bwlbuck",
-    "medievalduck",
-    "iamaverag8",
-    "bluduk",
-    "player36",
-    "k1dfun",
-    "duckdabro",
-    ".index",
-    "evildragonvr",
-    "iskype",
-    "eclipse_queen",
-    "san8102",
-    "dandestroys",
-    "crazysherman2",
-    "insert.vr",
-    "kudcom",
-    "mr.madlord",
-    "yelloducvr",
-    "mc1125",
-    "mrpiglett",
-    "oreo_gaming",
-    "QT_synth",
-    "the.nothing",
-    "ryzx",
-    "lowkeyvrpro",
-    "betterthannskc7",
-    "logical.on.yt",
-    "garythememer",
-    "ima_rainbow",
-    "ocgrb",
-    "ebspark",
-    "piss_vr",
-    "dean_barrett",
-    "0_pancake_0",
-    "socksisbadm8__sox",
-    "oculuskane",
-    "llamadramaballs",
-    "dotlndex",
-    "dyght_light",
-    "lvffy"
-]:
+with open("all_users.json") as f:
+    users = json.load(f)
+for name in users:
+#[
+    # "22joshi22",
+    # "1235311PNUT",
+    # "AFT_Daring",
+    # "Auran_Simia",
+    # "BlackCat508",
+    # "boohoo77",
+    # "Caziggy",
+    # "cjbeast006",
+    # "CoblerB1",
+    # "CokeDeee",
+    # "Convrist",
+    # "CursedPhantom",
+    # "cyclops_22",
+    # "D2whiplash",
+    # "dotindex",
+    # "envi0us",
+    # "felixart",
+    # "FROSTY_CROSS",
+    # "fruitbythefist",
+    # "gman2giant",
+    # "iceyboxes",
+    # "JeffBobDude",
+    # "kookookrazy",
+    # "levi8020",
+    # "MiloJenSopha",
+    # "Mystery8281",
+    # "Nash_Human",
+    # "nixmars",
+    # "RainbowMonke",
+    # "rougueRunner",
+    # "Shadowmaker99",
+    # "slin",
+    # "SteijeAwesome",
+    # "TLTT",
+    # "vrvinny",
+    # "wpbrotherly",
+    # "yoshibigbum",
+    # "slin",
+    # "vestria",
+    # "fitartist334071",
+    # "poggggg",
+    # "mystery8281",
+    # "littlebeastm8",
+    # "trap11190",
+    # "luhmao",
+    # "itz_alwx",
+    # "bwlbuck",
+    # "medievalduck",
+    # "iamaverag8",
+    # "bluduk",
+    # "player36",
+    # "k1dfun",
+    # "duckdabro",
+    # ".index",
+    # "evildragonvr",
+    # "iskype",
+    # "eclipse_queen",
+    # "san8102",
+    # "dandestroys",
+    # "crazysherman2",
+    # "insert.vr",
+    # "kudcom",
+    # "mr.madlord",
+    # "yelloducvr",
+    # "mc1125",
+    # "mrpiglett",
+    # "oreo_gaming",
+    # "QT_synth",
+    # "the.nothing",
+    # "ryzx",
+    # "lowkeyvrpro",
+    # "betterthannskc7",
+    # "logical.on.yt",
+    # "garythememer",
+    # "ima_rainbow",
+    # "ocgrb",
+    # "ebspark",
+    # "piss_vr",
+    # "dean_barrett",
+    # "0_pancake_0",
+    # "socksisbadm8__sox",
+    # "oculuskane",
+    # "llamadramaballs",
+    # "dotlndex",
+    # "dyght_light",
+    # "lvffy"
+#]:
     print(name)
     try:
         generate(name)
