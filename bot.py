@@ -77,7 +77,7 @@ def generate(userName):
     else:
         head = {
             "file": "cosmetics/head/head/head.obj",
-            "materials": ["default_primary_color", "default_secondary_color", "default_secondary_color_visor"]
+            "materials": ["default_secondary_color", "default_primary_color", "default_secondary_color"]
         }
     if neck:
         neck = {
@@ -208,15 +208,57 @@ def generate(userName):
     # bpy.ops.wm.save_as_mainfile(filepath=f"{userName}.blend")
 
 for name in [
-    "Nash_Human",
-    "fruitbythefist",
-    "tltt",
-    "nixmars",
+    "22joshi22",
+    "1235311PNUT",
+    "AFT_Daring",
+    "Auran_Simia",
+    "BlackCat508",
+    "boohoo77",
+    "Caziggy",
+    "cjbeast006",
+    "CoblerB1",
+    "CokeDeee",
+    "Convrist",
+    "CursedPhantom",
+    "cyclops_22",
+    "D2whiplash",
+    "dotindex",
     "envi0us",
+    "felixart",
+    "FROSTY_CROSS",
+    "fruitbythefist",
+    "gman2giant",
     "iceyboxes",
-    "the.nothing",
+    "JeffBobDude",
+    "kookookrazy",
+    "levi8020",
+    "MiloJenSopha",
+    "Mystery8281",
+    "Nash_Human",
+    "nixmars",
+    "RainbowMonke",
+    "rougueRunner",
+    "Shadowmaker99",
+    "slin",
+    "SteijeAwesome",
+    "TLTT",
     "vrvinny",
-    "yoshibigbum"
+    "wpbrotherly",
+    "yoshibigbum",
+    "slin",
+    "vestria",
+    "fitartist334071",
+    "poggggg",
+    "mystery8281",
+    "littlebeastm8",
+    "trap11190",
+    "luhmao",
+    "itz_alwx",
+    "bwlbuck",
+    "medievalduck",
+    "iamaverag8",
+    "bluduk",
+    "player36"
 ]:
     print(name)
     try:
