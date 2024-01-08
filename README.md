@@ -1,0 +1,1 @@
+`blender --background --python bot.py`
