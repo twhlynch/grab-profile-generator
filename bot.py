@@ -208,7 +208,15 @@ def generate(userName):
     # bpy.ops.wm.save_as_mainfile(filepath=f"{userName}.blend")
 
 for name in [
-    "22joshi22"
+    "Nash_Human",
+    "fruitbythefist",
+    "tltt",
+    "nixmars",
+    "envi0us",
+    "iceyboxes",
+    "the.nothing",
+    "vrvinny",
+    "yoshibigbum"
 ]:
     print(name)
     try:
